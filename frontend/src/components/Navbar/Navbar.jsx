@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Box,  styled} from '@mui/material'
+import {Box,  Button,  styled} from '@mui/material'
 import CustomButton from '../CustomBtn/CustomButton'
 import ICTlogo from '../../assets/ICT-internship.png';
 
@@ -17,6 +17,7 @@ import{
     ListItemIcon,
     ListItemText,
 } from '@mui/material'
+import { Link } from 'react-router-dom';
 
 
 function Navbar() {
@@ -189,7 +190,15 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
             backgroundColor='#00bbf0'
             color='#fff'
             buttonText="Register"
-        />
+              />
+    
+    <Button
+      variant="contained"
+      style={{ backgroundColor: '#00bbf0', color: '#fff' }}
+      component={Link}
+      to="/signup">
+      Register
+    </Button>
         </Box>
     </Box>
   )
