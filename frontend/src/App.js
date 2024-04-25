@@ -7,19 +7,19 @@ import About from './components/Homepage/About';
 import Mentors from './components/Homepage/Mentors';
 import { Route, Routes } from 'react-router-dom';
 import Signup from './components/Signup';
-
+import Login from './components/Login';
 function App() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <Mentors />
-      <About />
-      <WhyUs />
-      <Footer />
+     <Navbar/>
+     <Hero/>
+     <Mentors/>
+     <WhyUs/>
+     <Footer/>
+     <About/>
       <Routes>
+      <Route path={'/login'} element={<Login />}></Route>
 
-        
         <Route path={'/signup'} element={<Signup />}></Route>
         {/* <Route path={'/login'} element={<Login />}></Route>
 
