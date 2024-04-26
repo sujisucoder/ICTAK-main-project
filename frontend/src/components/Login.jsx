@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button, Typography, Link ,IconButton, InputAdornment} from "@mui/material";
+import {  Typography, Link ,IconButton, InputAdornment} from "@mui/material";
 import { Link as RouterLink,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import CustomButton from './CustomBtn/CustomButton'
+
 
 
 const Login = () => {
@@ -112,9 +114,16 @@ const Login = () => {
          ></TextField>
        
       </div>
-      <Button style={{backgroundColor:'#00bbf0', color:'white'}} onClick={addHandler} >
-        Login
-      </Button>
+      <Box sx={{display:'flex',justifyContent:'center',textAlign:'center'}}>
+      <CustomButton 
+            backgroundColor='#00bbf0'
+            color='#fff'
+            buttonText="Login"
+            path="#"
+            onClick={addHandler}
+              />
+      </Box>
+   
       <Typography
         variant="body2"
         style={{ marginTop: "20px", color: "white" }}

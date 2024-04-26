@@ -1,32 +1,33 @@
 import './App.css';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Homepage/Hero';
 import Footer from './components/Footer/Footer';
-import WhyUs from './components/Homepage/WhyUs';
-import About from './components/Homepage/About';
-import Mentors from './components/Homepage/Mentors';
-import { Route, Routes } from 'react-router-dom';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import HomePage from './components/Homepage/HomePage';
 function App() {
+
+  const location = useLocation();
+
+  // Check if the current route is login or signup
+  const isAuthRoute = location.pathname === '/login' || location.pathname === '/signup';
   return (
     <>
-     <Navbar/>
-     <Hero/>
-     <Mentors/>
-     <WhyUs/>
-     <Footer/>
-     <About/>
+    {!isAuthRoute && <Navbar />}
       <Routes>
-      <Route path={'/login'} element={<Login />}></Route>
-
-        <Route path={'/signup'} element={<Signup />}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+      {!isAuthRoute && <Footer />}
+      {/* <Routes> */}
+      
         {/* <Route path={'/login'} element={<Login />}></Route>
 
         <Route path={'/'} element={<Main child={<Home />} />}></Route>
 
         <Route path={'/dashboard'} element={<Main child={<Dashboard />} />}></Route> */}
-      </Routes>
+      {/* </Routes> */}
     </>
   );
 }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import { Container, Button, Grid, Radio, RadioGroup, FormControlLabel, TextField, IconButton, InputAdornment, FormControl } from '@mui/material';
+import { Container, Grid, Radio, RadioGroup, FormControlLabel, TextField, IconButton, InputAdornment, FormControl, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import CustomButton from './CustomBtn/CustomButton'
+
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -83,20 +85,15 @@ const Signup = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={12} md={12} style={{ textAlign: 'center' }}>
-            <Button
-              variant='contained'
-              sx={{
-                backgroundColor: '#00bbf0',
-                color: '#fff',
-                '&:hover': {
-                  backgroundColor: '#fff',
-                  color: '#001F3F',
-                }
-              }}
-              onClick={addHandler}
-            >
-              Sign Up
-            </Button>
+          <Box sx={{display:'flex',justifyContent:'center',textAlign:'center'}}>
+      <CustomButton 
+            backgroundColor='#00bbf0'
+            color='#fff'
+            buttonText="Signup"
+            path="#"
+            onClick={addHandler}
+              />
+      </Box>
           </Grid>
           <Grid>
             <Typography sx={{ border: '1px solid white', padding: '10px', textAlign: 'center', marginTop: '10px' }}>

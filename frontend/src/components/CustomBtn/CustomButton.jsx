@@ -1,5 +1,6 @@
-import React from 'react'
-import { Button, styled} from '@mui/material'
+import React from 'react';
+import { Button, styled } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 const CustomButton = ({
@@ -8,14 +9,19 @@ const CustomButton = ({
     buttonText,
     welcomeBtn,
     guideBtn,
-    getStartedBtn
-})=> {
+    getStartedBtn,
+    path,
+    onClick 
+}) => {
+    const StyledLink = styled(Link)({
+        textDecoration: 'none', // Remove underline
+    });
 
-    const CustomButton = styled(Button)(({theme})=>({
+    const CustomButton = styled(Button)(({ theme }) => ({
         backgroundColor: backgroundColor,
         color: color,
-        fontWeight:'700',
-        fontSize:"14px",
+        fontWeight: '700',
+        fontSize: "14px",
         cursor: "pointer",
         padding: "0.5rem 1.25rem",
         borderRadius: "7px",
@@ -28,18 +34,20 @@ const CustomButton = ({
             borderColor: backgroundColor
         },
         [theme.breakpoints.down("md")]: {
-            margin: (welcomeBtn || getStartedBtn) && theme.spacing(0,"auto",3,"auto"),
+            margin: (welcomeBtn || getStartedBtn) && theme.spacing(0, "auto", 3, "auto"),
             width: (welcomeBtn || getStartedBtn) && "90%",
         },
         [theme.breakpoints.down("sm")]: {
             marginTop: guideBtn && theme.spacing(3),
             width: guideBtn && "90%"
         }
-    }))
+    }));
 
-  return (
-    <CustomButton>{buttonText}</CustomButton>
-  )
+    return (
+        <StyledLink to={path}>
+            <CustomButton onClick={onClick}>{buttonText}</CustomButton> 
+        </StyledLink>
+    );
 }
 
-export default CustomButton
+export default CustomButton;
