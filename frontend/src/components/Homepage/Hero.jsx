@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 import { Container } from "@mui/system";
 import CustomButton from "../../components/CustomBtn/CustomButton";
 import Welcome from "../../assets/slider-img.png";
-
+import "./heroAnimation.css"
 
 function Hero() {
     const CustomBox = styled(Box)(({ theme }) => ({
@@ -32,7 +32,7 @@ function Hero() {
     const PhoneImg = styled("img")(({ theme }) => ({
         height:'60vh',
         width:'auto',
-       
+        animation: 'floating 3s ease-in-out infinite', 
         [theme.breakpoints.down("md")]: {
             height:'30vh',
             width:'auto',
@@ -40,7 +40,7 @@ function Hero() {
     }));
 
     return (
-        <Box  sx={{ background: 'linear-gradient(130deg, #231a6f, #0f054c)', minHeight: "80vh" }}>
+        <Box  sx={{ background: 'linear-gradient(90deg, #1c126c,#190e68, #06014b)', minHeight: "80vh" }}>
             <Container>
                 <CustomBox>
                     <Box sx={{ flex: "1" }}>

@@ -102,9 +102,10 @@ const NavbarLinkBox = styled(Box)(({theme})=>({
 }))
 
 const NavbarLink = styled(Box)(({theme})=>({
-    fontSize:"14px",
+    fontSize:"16px",
     color: 'white',
-    fontWeight:'bold',
+    fontFamily: 'Open Sans, sans-serif',
+    fontWeight:600,
     cursor: 'pointer',
     '&:hover':{
         color:'#007bff'
@@ -139,7 +140,7 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
             justifyContent: 'space-between',
             padding: "40px",
             maxWidth: 'auto',
-            background: 'linear-gradient(130deg, #231a6f, #0f054c)',
+            background: 'linear-gradient(90deg, #1c126c,#190e68, #06014b)',
             marginLeft: '0px',
             marginBottom: '-24px'
         }}
