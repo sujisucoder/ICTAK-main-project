@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import {Box,  styled} from '@mui/material'
 import CustomButton from '../CustomBtn/CustomButton'
 import ICTlogo from '../../assets/ICT-internship.png';
+import { Link } from 'react-router-dom';
+
 
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -26,7 +28,7 @@ function Navbar() {
     const nav_titles = [
     {
         id:0,
-        path:'/',
+        path:'#',
         display:'Home'
     },
     {
@@ -101,9 +103,10 @@ const NavbarLinkBox = styled(Box)(({theme})=>({
     }
 }))
 
-const NavbarLink = styled(Box)(({theme})=>({
+const NavbarLink = styled(Link)(({theme})=>({
     fontSize:"16px",
     color: 'white',
+    textDecoration:'none',
     fontFamily: 'Open Sans, sans-serif',
     fontWeight:600,
     cursor: 'pointer',
@@ -181,7 +184,7 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
         <NavbarLinkBox>
             {
                 nav_titles.map((item,index)=>(
-                    <NavbarLink key={item.id} variant="body2">{item.display}</NavbarLink>
+                    <NavbarLink  key={item.id} variant="body2" to={item.path}>{item.display}</NavbarLink>
                 ))
             }
         </NavbarLinkBox>
