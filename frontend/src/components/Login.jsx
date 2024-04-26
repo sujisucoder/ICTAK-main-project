@@ -21,18 +21,19 @@ const Login = () => {
   };
   
   const addHandler = () => {
+    console.log("addHandler initialised...");
     axios
       .post("http://localhost:5000/api/student/login", user)
       .then((res) => {
-        if (res.data.message === "User Login Success") {
+        if (res.data.message === "Login success") {
           alert(res.data.message);
-          navigate("");
+          navigate("/sDashboard");
         } else {
           alert(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error occurred during login:", err);
       });
   };
 

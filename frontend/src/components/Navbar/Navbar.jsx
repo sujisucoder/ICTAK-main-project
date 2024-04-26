@@ -192,8 +192,8 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
         <CustomButton 
             backgroundColor='#00bbf0'
             color='#fff'
-            buttonText="Register"
-            path="/signup"
+            buttonText="Login"
+            path="/login"
               />
         </Box>
     </Box>
