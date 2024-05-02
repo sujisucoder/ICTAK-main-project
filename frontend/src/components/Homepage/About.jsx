@@ -3,8 +3,7 @@ import { styled } from '@mui/system';
 import React from 'react'
 
 
-
-function About() {
+function About({aboutRef}) {
 
     const CustomBox = styled(Box)(({ theme }) => ({
 
@@ -34,7 +33,7 @@ function About() {
     }));
 
     return (
-        <CustomBox>
+        <CustomBox ref={aboutRef}>
             <Title sx={{color:'white', fontSize:60}}  variant='h4'>About Us</Title>
             <Typography sx={{ color:'white',textAlign:'center'}} variant='body1'>ICTAK internship, a unit of ICTAK academy, is focussed on empowering people and organisations with tech-led solutions to transform educational and skill development domains for the new world. We use a uniquely built ‘phygital’ platform that connects the digital and physical worlds.</Typography>
         </CustomBox>

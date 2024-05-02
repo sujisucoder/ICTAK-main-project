@@ -4,12 +4,12 @@ import WhyUs from './WhyUs';
 import About from './About';
 import Mentors from './Mentors';
 
-function HomePage() {
+function HomePage({aboutRef}) {
   return (
     <>
       <Hero />
       <Mentors />
-      <About />
+      <About aboutRef={aboutRef}  />
       <WhyUs />
     </>
   )

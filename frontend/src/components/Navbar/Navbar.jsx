@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import {Box,  styled} from '@mui/material'
+import {Box,  styled, IconButton, Menu, MenuItem} from '@mui/material'
 import CustomButton from '../CustomBtn/CustomButton'
-import ICTlogo from '../../assets/ICT-internship.png';
+import ICTlogo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 
@@ -11,6 +11,8 @@ import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import HomeIcon from '@mui/icons-material/Home';
 import ContactsIcon from '@mui/icons-material/Contacts';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import{
     Drawer,
     List,
@@ -21,31 +23,41 @@ import{
 } from '@mui/material'
 
 
-function Navbar() {
-
+function Navbar({isLoggedIn, username,scrollToAbout }) {
     const [mobileMenu, setMobileMenu] = useState({left:false})
+    const [anchorEl, setAnchorEl] = useState(null);
 
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+      const handleMenuClose = () => {
+        setAnchorEl(null);
+      };
+    
+      const handleLogout = () => {
+        // Implement logout logic here, such as clearing user session
+        // and redirecting to the logout page
+        // Example: history.push('/logout');
+      };
+      
     const nav_titles = [
     {
         id:0,
-        path:'#',
+        path:'/',
         display:'Home'
     },
     {
         id:1,
-        path:'/',
-        display:'Mentors'
+        path:'#',
+        display:'courses'
     },
     {
-        id:2,
-        path:'/',
+        id:1,
+        path:'#about',
         display:'About'
     },
-    {
-        id:3,
-        path:'/',
-        display:'Contact'
-    },
+
 ]
 
 const toggleDrawer = (anchor,open)=>(event)=>{
@@ -172,7 +184,7 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
         <NavbarLogo src={ICTlogo} alt="logo" />
     </Box>    
 
-    </Box>        
+    </Box>                
        
         <Box  sx={{
         display:'flex',
@@ -184,17 +196,30 @@ const CustomMenuIcon = styled(MenuIcon)(({theme})=>({
         <NavbarLinkBox>
             {
                 nav_titles.map((item,index)=>(
-                    <NavbarLink  key={item.id} variant="body2" to={item.path}>{item.display}</NavbarLink>
+                    <NavbarLink  key={item.id} variant="body2"  onClick={() => {
+                        if (item.path === '#about' && scrollToAbout) {
+                          scrollToAbout();
+                        }
+                      }}>{item.display}</NavbarLink>
                 ))
-            }
-        </NavbarLinkBox>
-        <NavbarLink variant="body2"></NavbarLink>
-        <CustomButton 
-            backgroundColor='#00bbf0'
-            color='#fff'
-            buttonText="Login"
-            path="/login"
-              />
+            }      
+        </NavbarLinkBox>                                               
+        
+        {isLoggedIn ? (
+          <>
+            <Box>
+              <IconButton onClick={handleMenuOpen} color='primary'>
+                {username}
+                <ArrowDropDownIcon />
+              </IconButton>
+              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </Box>
+          </>
+        ) : (
+          <CustomButton backgroundColor="#00bbf0" color="#fff" buttonText="Login" path="/login" />
+        )}
         </Box>
     </Box>
   )
