@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import HomePage from './components/Homepage/HomePage';
 import SDashboard from './components/StudntDashboard/SDashboard';
+import ProjectDetails from './components/projectDetails/ProjectDetails';
 
 import  { useRef } from 'react';
 
@@ -40,7 +41,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/sDashboard" element={<SDashboard />} />
-        {/* <Route path="/project/:id" component={ProjectDetails} /> */}
+        {/* <Route path="/project-details/:id" component={ProjectDetails} /> */}
+        <Route path="/project-details" element={<ProjectDetails />} />
       </Routes>
       {!isAuthRoute && <Footer />}
       
