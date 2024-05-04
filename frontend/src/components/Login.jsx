@@ -9,7 +9,7 @@ import CustomButton from './CustomBtn/CustomButton'
 
 
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({ email: "", password: "" ,showPassword: false}); 
@@ -27,6 +27,8 @@ const Login = () => {
       .then((res) => {
         if (res.data.message === "Login success") {
           alert(res.data.message);
+          // Call the onLogin prop function and pass the token and username
+          onLogin(res.data.token, user.email);
           navigate("/sDashboard");
         } else {
           alert(res.data.message);
@@ -36,7 +38,7 @@ const Login = () => {
         console.log("Error occurred during login:", err);
       });
   };
-
+  
   return (
     <div
     style={{

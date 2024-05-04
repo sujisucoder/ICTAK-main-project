@@ -9,6 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { blue, orange } from '@mui/material/colors';
 import Link from '@mui/material/Link';
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const RootCard = styled(Card)({
   display: 'flex',
@@ -76,7 +77,13 @@ const NameTypography = styled(Typography)({
   },
 });
 
-function ProjectCard({ title, imageUrl, description }) {
+function ProjectCard({ title, imageUrl, description, projectId }) {
+
+  const history = useNavigate();
+
+  const handleCardClick = () => {
+    history.push(`/project-details/${projectId}`);
+  };
 
     const TopDiv = styled(Box)({
         height: '30vh',
@@ -89,13 +96,15 @@ function ProjectCard({ title, imageUrl, description }) {
       });
       
   return ( 
-    <RootCard>
+    <RootCard onClick={handleCardClick}>
+      <Link href={`/project-details/${projectId}`} color="inherit" underline="none">
       <TopDiv>
         <CategoryDiv>click here</CategoryDiv>
       </TopDiv>
+      </Link>
       <BottomCardContent>
         <Typography variant="h5" component="h2">
-          <Link href="#" color="inherit" underline="none"><NameTypography>{title}</NameTypography></Link>
+          <Link href={`/project-details/${projectId}`} color="inherit" underline="none"><NameTypography>{title}</NameTypography></Link>
         </Typography>
         <AuthorDiv></AuthorDiv>
         <IntroTypography variant="body1">{description}</IntroTypography>

@@ -29,6 +29,7 @@ function SDashboard() {
     axios.get("http://localhost:5000/api/student/get-projects")
       .then((res) => {
         setProjects(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log("error getting projects", err);
@@ -39,14 +40,18 @@ function SDashboard() {
     <Box>
     <Title variant="h1">Student Dashboard</Title>
     <CardBox>
-      {projects.map((project, index) => (
-        <ProjectCard
-          key={index}
-          title={project.title}
-          imageUrl={project.imageUrl}
-          description={project.description}
-        />
-      ))}
+      {projects.map((project) => {
+        // console.log(project._id); // Log the _id
+        return (
+          <ProjectCard
+            key={String(project._id)}
+            projectId={project._id}
+            title={project.title}
+            imageUrl={project.imageUrl}
+            description={project.description}
+          />
+        );
+      })}
     </CardBox>
   </Box>
   );

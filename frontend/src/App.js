@@ -1,6 +1,6 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import React, { useState, useEffect  } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Signup from './components/Signup';
@@ -8,44 +8,61 @@ import Login from './components/Login';
 import HomePage from './components/Homepage/HomePage';
 import SDashboard from './components/StudntDashboard/SDashboard';
 import ProjectDetails from './components/projectDetails/ProjectDetails';
+import { jwtDecode } from 'jwt-decode';
 
-import  { useRef } from 'react';
+// Import the UserAuthRoute component
 
+import UserAuthRoute from './components/Authentication/UserAuthRoute'
 
 function App() {
-
   const location = useLocation();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
 
-  const aboutRef = useRef(null);
-
   useEffect(() => {
-    setIsLoggedIn(false);
-    setUsername('sujith');
+    const token = localStorage.getItem('token');
+    if (token) {
+      // User is logged in
+      setIsLoggedIn(true);
+      // Decode token to extract user information
+      const decodedToken = jwtDecode(token);
+      setUsername(decodedToken.username);
+    }
   }, []);
 
-  const scrollToAbout = () => {
-    if (aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleLogin = (token, username) => {
+    // Store token in local storage
+    localStorage.setItem('token', token);
+    // Set state to indicate user is logged in
+    setIsLoggedIn(true);
+    setUsername(username);
+  };
+
+  const handleLogout = () => {
+    // Remove token from local storage
+    localStorage.removeItem('token');
+    // Set state to indicate user is logged out
+    setIsLoggedIn(false);
+    setUsername('');
+    // Redirect to homepage
+    navigate('/');
   };
 
   // Check if the current route is login or signup
   const isAuthRoute = location.pathname === '/login' || location.pathname === '/signup';
+
   return (
     <>
-    {!isAuthRoute && <Navbar scrollToAbout={scrollToAbout} isLoggedIn={isLoggedIn} username={username} />}
+      {!isAuthRoute && <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />}
       <Routes>
-        <Route path="/" element={<HomePage aboutRef={aboutRef}  />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/sDashboard" element={<SDashboard />} />
-        {/* <Route path="/project-details/:id" component={ProjectDetails} /> */}
-        <Route path="/project-details" element={<ProjectDetails />} />
-      </Routes>
+  <Route path="/" element={<HomePage />} />
+  <Route path="/login" element={<Login onLogin={handleLogin} />} />
+  <Route path="/signup" element={<Signup />} />
+  <Route path="/sDashboard" element={<SDashboard />} isLoggedIn={isLoggedIn} />
+  <Route path="/project-details/:id" element={<ProjectDetails />} />
+</Routes>
       {!isAuthRoute && <Footer />}
-      
     </>
   );
 }
